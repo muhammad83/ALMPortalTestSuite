@@ -20,12 +20,13 @@ Scenario: A build can be built from the Alm portal interface
 	| env_name      |
 	| Main-ALMFETDS |
 
+	Scenario: search for build
 	Given I am deploying main alm build
 	When I search for MAIN-ALMBUILD
 	Then I should get compiled buils
 
 
-	Scenario: build searched deploy
+	Scenario: build searched build
 	Given I have found the compiled deploy
 	Then I can queue it by pressing queue build button
 

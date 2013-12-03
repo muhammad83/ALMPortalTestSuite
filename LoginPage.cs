@@ -11,12 +11,14 @@ namespace ALMPortalTestSuite
     public class LoginPage : BasePage
     {
         private IWebDriver driver;
-        public void OverrideLoginWindow()
+        public HomePage OverrideLoginWindow()
         {
             FirefoxProfile profile = new FirefoxProfile();
             profile.SetPreference("network.http.phishy-userpass-length", 255);
             profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", "http://asnav-devweb-13:8888/");
             driver = new FirefoxDriver(profile);
+
+            return new HomePage(driver);
         }
 
         public void CleanUp()

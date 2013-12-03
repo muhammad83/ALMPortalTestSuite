@@ -28,16 +28,8 @@ namespace ALMPortalTestSuite
                 takeScreenShot(e, driver, "Home_Page_Navigation_Error");
             }            
         }
-        /*
-        public void OverrideLoginWindow()
-        {
-            FirefoxProfile profile = new FirefoxProfile();
-            profile.SetPreference("network.http.phishy-userpass-length", 255);
-            profile.SetPreference("network.automatic-ntlm-auth.trusted-uris", "http://asnav-devweb-13:8888/");
-            driver = new FirefoxDriver(profile);
-        }*/
 
-        public BuildScreenPage NavigateToBuildScreen()
+        public BuildDefinitionsPage NavigateToBuildDefinitionsPage()
         {
             try
             {
@@ -47,11 +39,27 @@ namespace ALMPortalTestSuite
             }
             catch (SystemException ex)
             {
-                takeScreenShot(ex, driver, "Navigation_To_Build_Screen_Error");
+                takeScreenShot(ex, driver, "Navigation_To_Build_Definitions_Page_Error");
             }
 
-            return new BuildScreenPage(driver);
+            return new BuildDefinitionsPage(driver);
+        }
 
+        public DeployDefinitionsPage NavigateToDeployDefinitionsPage() 
+        {
+            try
+            {
+                //click on deployment tab to show drop down menu
+                driver.FindElement(By.XPath("id('sidebar-left')/div/ul/li[6]/a")).Click();
+                //click on deployment definitions tab
+                driver.FindElement(By.XPath("id('sidebar-left')/div/ul/li[6]/ul/li[1]/a")).Click();
+            }
+            catch (SystemException ex)
+            {
+                takeScreenShot(ex, driver, "Navigation_To_Deployment_Definitions_Page_Error");
+            }
+
+            return new DeployDefinitionsPage(driver);
         }
     }
 }

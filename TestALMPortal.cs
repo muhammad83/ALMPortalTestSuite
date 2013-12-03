@@ -12,19 +12,17 @@ namespace ALMPortalTestSuite
     {
         private IWebDriver driver;
         [Test]
-        public void TestALMHomePage() 
+        public void TestALMBuildJourney() 
         {
-            var homePage = new HomePage(driver);
-            var searchBuild = "Main-ALMFETDS";
-            homePage.OpenALMPortal();
-            homePage.NavigateToBuildScreen();
-            homePage.SearchForABuild(searchBuild);
-            Assert.IsTrue(homePage.VerifySearchReturnedResults());
-            Assert.IsTrue(homePage.VerifyFirstElementOfSearch(searchBuild));
-            homePage.ClickSearchedBuildToDisplayQueueButton();
-            homePage.QueueSearchedBuild();
-            homePage.QueueBuildFromBuildParametersScreen();
-            homePage.CleanUp();
+            var queueBuildJourney = new QueueBuildJourney();
+            queueBuildJourney.QueueBuild("Main-ALMFETDS");
+        }
+
+        [Test]
+        public void TestALMDeployJourney()
+        {
+            var queueDeployJourney = new QueueDeployJourney();
+            queueDeployJourney.QueueDeploy("MQPT1");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
@@ -17,7 +18,13 @@ namespace ALMPortalTestSuite
 
             try
             {
-                screenShot.SaveAsFile(fileName + DateTime.Now + ".png", ImageFormat.Png);
+                 var screenshotDir = @"\ScreenShots\";
+                if (!Directory.Exists(screenshotDir))
+                {
+                    Directory.CreateDirectory(screenshotDir);
+                }
+
+                screenShot.SaveAsFile(screenshotDir + fileName + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".png", ImageFormat.Png);
             }
             catch (IOException ioe)
             {
@@ -25,7 +32,7 @@ namespace ALMPortalTestSuite
             }
             throw e;
         }
-
+       
         protected void CleanUp(IWebDriver driver)
         {
             driver.Close();
