@@ -25,25 +25,23 @@ namespace ALMPortalTestSuite
             }
             catch (Exception ex)
             {
-                
-                throw;
-            }            
+                takeScreenShot(ex, driver, "Search_error");
+            }
         }
 
         protected bool VerifySearchReturnedResults(IWebDriver driver)
         {
-            return driver.FindElements(By.XPath("id('content')/div/div/div/div/div/div")).Count > 0 ? true : false;
-        }
+            var searchResult = false;
+            try
+            {
+                searchResult = driver.FindElements(By.XPath("id('content')/div/div/div/div/div/div")).Count > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                takeScreenShot(ex, driver, "Veifying search results error");
+            }
 
-        protected bool VerifyFirstElementOfSearch(IWebDriver driver,string BuildSearch)
-        {
-            return driver.FindElement(By.XPath("id('content')/div/div/div/div/div/div")).Text == BuildSearch ? true : false;
-        }
-
-        protected void ClickSearchedBuildToDisplayQueueButton(IWebDriver driver)
-        {
-            //click on the first return result to highlight it and display the queue button
-            driver.FindElement(By.XPath("id('content')/div/div[3]/div[1]/div[1]/div[2]/div/div[1]")).Click();
+            return searchResult;
         }
     }
 }

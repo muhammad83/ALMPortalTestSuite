@@ -13,6 +13,14 @@ namespace ALMPortalTestSuite
         {
             var deploySearchPage = ((new LoginPage()).OverrideLoginWindow()).NavigateToDeployDefinitionsPage();
             deploySearchPage.SearchForDeploy(deployName);
+            Assert.IsTrue(deploySearchPage.VerifySearchReturnedResults());
+            Assert.IsTrue(deploySearchPage.VerifyFirstElementOfSearch(deployName));
+            deploySearchPage.ClickSearcheDeployToDisplayQueueButton();
+            deploySearchPage.QueueSearchDeploy();
+            deploySearchPage.QueueDeployFromPopUpWindow();
+            Assert.IsTrue(deploySearchPage.CheckQueuedBuild(deployName));
+            deploySearchPage.CleanUp(EnumStopbuild.stopBuild);
+
             
         }
     }

@@ -24,7 +24,7 @@ namespace ALMPortalTestSuite
             try
             {
                 var buildHeader = driver.FindElement(By.XPath(queueBuildPageHeader)).Text;
-                if (!buildHeader.Equals("Queue Build for Main-ALMFETDS"))
+                if (!buildHeader.Contains("Queue Build for"))
                 {
                     var exception = new InvalidElementStateException("This is not queue build definitation page " + driver.Url);
                     takeScreenShot(exception, driver, "Not_On_Queue_Build_Page_Error");
